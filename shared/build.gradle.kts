@@ -25,6 +25,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-core:3.2.2")
+                implementation("io.ktor:ktor-client-core:2.1.2")
+                implementation("io.ktor:ktor-client-logging:2.1.2")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.2")
+                implementation("io.ktor:ktor-client-content-negotiation:2.1.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             }
         }
         val commonTest by getting {
@@ -32,7 +37,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-android:2.1.2")
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -51,6 +60,9 @@ kotlin {
             iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:2.1.2")
+            }
         }
     }
 }
