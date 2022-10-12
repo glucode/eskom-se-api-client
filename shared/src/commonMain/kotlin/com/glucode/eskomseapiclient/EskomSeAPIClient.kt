@@ -36,6 +36,7 @@ class EskomSeAPIClientImpl(
         return try {
             NetworkResult.Success(response.body<StatusResponse>())
         } catch (e: Exception) {
+            println(e)
             NetworkResult.GeneralError()
         }
     }

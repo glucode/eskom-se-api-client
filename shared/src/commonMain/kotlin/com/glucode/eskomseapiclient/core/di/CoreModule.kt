@@ -20,15 +20,6 @@ internal class CoreModule(
     val module = module {
         single<HttpClient> {
             HttpClient {
-                if (enableHttpLogging) {
-                    install(Logging) {
-                        logger = Logger.DEFAULT
-                        level = LogLevel.HEADERS
-                        filter { request ->
-                            request.url.host.contains("ktor.io")
-                        }
-                    }
-                }
                 install(ContentNegotiation) {
                     json(
                         Json {
@@ -36,6 +27,10 @@ internal class CoreModule(
                             isLenient = true
                         }
                     )
+                }
+                install(Logging) {
+                    logger = Logger.DEFAULT
+                    level = LogLevel.ALL
                 }
             }.apply {
                 plugin(HttpSend).intercept { request ->

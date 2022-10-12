@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    kotlin("plugin.serialization") version "1.7.10"
     id("com.android.library")
 }
 
@@ -30,6 +31,7 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.2")
                 implementation("io.ktor:ktor-client-content-negotiation:2.1.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.slf4j:slf4j-simple:1.7.26")
             }
         }
         val commonTest by getting {
