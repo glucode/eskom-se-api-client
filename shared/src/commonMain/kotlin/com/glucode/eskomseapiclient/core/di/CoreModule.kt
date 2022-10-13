@@ -12,8 +12,8 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
-
 internal class CoreModule(
+    private val host: String,
     private val accessTokenProvider: AccessTokenProvider,
     enableHttpLogging: Boolean = false
 ) {
@@ -45,6 +45,7 @@ internal class CoreModule(
 
         single<EskomSeAPIClient> {
             EskomSeAPIClientImpl(
+                host = host,
                 httpClient = get()
             )
         }

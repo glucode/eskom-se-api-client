@@ -5,7 +5,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
 class DI(
-    serverUrl: String,
+    host: String,
     accessTokenProvider: AccessTokenProvider,
     enableHttpLogging: Boolean = false,
     appDeclaration: KoinAppDeclaration? = null
@@ -15,6 +15,7 @@ class DI(
         startKoin{
             modules(
                 CoreModule(
+                    host,
                     accessTokenProvider,
                     enableHttpLogging
                 ).module
