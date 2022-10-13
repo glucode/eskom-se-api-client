@@ -142,4 +142,29 @@ class MainViewModel: MainViewModeling {
 ```
 
 ## Android Setup
+
+### Step 1 - Include this project in your app
+Add this to the bottom of your Settings.gradle file
+```Kotlin
+include ':EskomSeAPIClient'
+project(':EskomSeAPIClient').projectDir = new File(settingsDir, 'YOUR_SUBMODULE_NAME/shared')
+```
+
+### Step 2 - Create an AccessTokenProvider
+```Kotlin
+class AccessTokenProviderImpl: AccessTokenProvider {
+    override suspend fun provideAccessToken(): String = "YOUR_ACCESS_TOKEN"
+}
+```
+
+### Step 3 - Instantiate Dependency injection
+```Kotlin
+DI(
+    host = "developer.sepush.co.za",
+    accessTokenProvider = AccessTokenProviderImpl(),
+    enableHttpLogging = true
+)
+```
+
+### Step 4 - Get a reference to EskomSeAPIClient and gooi requests
 TODO
