@@ -28,9 +28,11 @@ internal class CoreModule(
                         }
                     )
                 }
-                install(Logging) {
-                    logger = Logger.DEFAULT
-                    level = LogLevel.ALL
+                if (enableHttpLogging) {
+                    install(Logging) {
+                        logger = Logger.DEFAULT
+                        level = LogLevel.ALL
+                    }
                 }
             }.apply {
                 plugin(HttpSend).intercept { request ->
