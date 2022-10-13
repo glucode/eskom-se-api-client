@@ -20,7 +20,7 @@ interface EskomSeAPIClient {
     suspend fun getStatus(): NetworkResult<StatusResponse>
 }
 
-class EskomSeAPIClientImpl(
+internal class EskomSeAPIClientImpl(
     private val httpClient: HttpClient
 ): EskomSeAPIClient {
     override suspend fun getStatus(): NetworkResult<StatusResponse> {
