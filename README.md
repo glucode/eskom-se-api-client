@@ -90,54 +90,42 @@ struct EskomSeiOSClientApp: App {
 ```Swift
 import shared
 
-protocol MainViewModeling: ObservableObject {
-    func fetchStatus() async -> StatusResponse?
-    func fetchAreaInformation() async -> AreaInformationResponse?
-    func fetchAreasNearby() async -> AreasNearbyResponse?
-    func searchAreas() async -> AreasSearchResponse?
-    func fetchTopicsNearby() async -> TopicsNearbyResponse?
-    func fetchAllowance() async -> AllowanceResponse?
+private let apiClient: EskomSeAPIClient = Dependencies.shared.eskomSeAPIClient
+    
+func fetchStatus() async -> StatusResponse? {
+    let result = try! await apiClient.getStatus()
+
+    if (result is NetworkResultSuccess) {
+        return result.data!
+    } else {
+        //TODO - Handle error
+        return nil
+    }
 }
 
-class MainViewModel: MainViewModeling {
-    
-    private let apiClient: EskomSeAPIClient = Dependencies.shared.eskomSeAPIClient
-    
-    func fetchStatus() async -> StatusResponse? {
-        let result = try! await apiClient.getStatus()
-        
-        if (result is NetworkResultSuccess) {
-            return result.data!
-        } else {
-            //TODO - Handle error
-            return nil
-        }
-    }
-    
-    func fetchAreaInformation() async -> AreaInformationResponse? {
-        let result = try! await apiClient.getAreaInformation(areaId: "eskde-10-fourwaysext10cityofjohannesburggauteng", testEvent: .current)
-        return result.data
-    }
+func fetchAreaInformation() async -> AreaInformationResponse? {
+    let result = try! await apiClient.getAreaInformation(areaId: "eskde-10-fourwaysext10cityofjohannesburggauteng", testEvent: .current)
+    return result.data
+}
 
-    func fetchAreasNearby() async -> AreasNearbyResponse? {
-        let result = try! await apiClient.getAreasNearby(lat: -26.0269658, lon: 28.0137339)
-        return result.data
-    }
-    
-    func searchAreas() async -> AreasSearchResponse? {
-        let result = try! await apiClient.searchAreas(text: "fourways")
-        return result.data
-    }
-    
-    func fetchTopicsNearby() async -> TopicsNearbyResponse? {
-        let result = try! await apiClient.getTopicsNearby(lat: -26.0269658, lon: 28.0137339)
-        return result.data
-    }
-    
-    func fetchAllowance() async -> AllowanceResponse? {
-        let result = try! await apiClient.getAllowance()
-        return result.data
-    }
+func fetchAreasNearby() async -> AreasNearbyResponse? {
+    let result = try! await apiClient.getAreasNearby(lat: -26.0269658, lon: 28.0137339)
+    return result.data
+}
+
+func searchAreas() async -> AreasSearchResponse? {
+    let result = try! await apiClient.searchAreas(text: "fourways")
+    return result.data
+}
+
+func fetchTopicsNearby() async -> TopicsNearbyResponse? {
+    let result = try! await apiClient.getTopicsNearby(lat: -26.0269658, lon: 28.0137339)
+    return result.data
+}
+
+func fetchAllowance() async -> AllowanceResponse? {
+    let result = try! await apiClient.getAllowance()
+    return result.data
 }
 ```
 
