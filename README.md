@@ -19,7 +19,7 @@ This can be done by using Homebrew, or by manually downloading and installing fr
 ### Add this repo as a git submodule
 ```
 $ cd [PATH_TO_YOUR_PROJECT_ROOT]
-$ git clone https://github.com/glucode/eskom-se-api-client.git
+$ git submodule add https://github.com/glucode/eskom-se-api-client.git eskom-se-api-client
 $ git submodule update --init
 ```
 
